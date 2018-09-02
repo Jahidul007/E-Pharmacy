@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".orderPack.MyCart">
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="372dp"
+        android:layout_height="378dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/list"
+        android:layout_marginBottom="82dp"
+        android:text="Total:"
+        android:textSize="30dp"
+        android:layout_alignLeft="@+id/list" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/list"
+        android:layout_marginStart="-12dp"
+        android:text="Check out"
+        android:layout_alignLeft="@+id/list"
+        android:layout_marginLeft="-12dp"
+        android:backgroundTint="@color/colorPrimary"/>
+</RelativeLayout>

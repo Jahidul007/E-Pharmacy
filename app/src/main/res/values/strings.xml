@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">E-Medicare</string>
+    <string name="loading">Loading…</string>
+    <string name="log_error_occurred">"Error occurred: "</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="web_client_id">985300477523-tge6v4ma5jptgn7nqr3c1ukmfpqjrso1.apps.googleusercontent.com</string>
+</resources>

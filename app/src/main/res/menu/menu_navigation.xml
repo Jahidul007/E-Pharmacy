@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/main_menu">
+        <item
+            android:id="@+id/payment"
+            android:title="My Profile"
+            android:icon="@drawable/ic_android_black_24dp"/>
+        <item
+            android:id="@+id/trip"
+            android:title="Drug by Generics"
+            android:icon="@drawable/ic_build_black_24dp"/>
+        <item
+            android:id="@+id/tips"
+            android:title="Help"
+            android:icon="@drawable/ic_forward_black_24dp"/>
+        <item
+            android:id="@+id/logout"
+            android:title="Log out"
+            android:icon="@drawable/ic_invert_colors_black_24dp"/>
+    </group>
+
+    <group
+        android:id="@+id/legal_button"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/Legal"
+            android:icon="@drawable/ic_invert_colors_black_24dp"
+            android:title="About US" >
+        </item>
+    </group>
+</menu>

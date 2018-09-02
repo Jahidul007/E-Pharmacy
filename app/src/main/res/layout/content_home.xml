@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="10dp"
+    android:background="@color/offWhite"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".NavDrawerActivity">
+
+
+
+
+
+    <android.support.v7.widget.GridLayout
+        android:id="@+id/grid"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/comment"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp">
+
+        <Button
+            android:id="@+id/buttonGenerics"
+            android:layout_width="169dp"
+            android:layout_height="169dp"
+            android:text="Generics"
+            app:layout_column="1"
+            app:layout_row="0"
+            android:backgroundTint="@color/colorPrimary"
+            />
+
+        <Button
+            android:id="@+id/buttonPharmaceutical"
+            android:layout_width="169dp"
+            android:layout_height="169dp"
+            android:text="Pharmaceuticals"
+            app:layout_column="0"
+            app:layout_row="1"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        <Button
+            android:id="@+id/buttonOrder"
+            android:layout_width="169dp"
+            android:layout_height="169dp"
+            android:text="Order"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_column="1"
+            app:layout_row="2" />
+
+        <Button
+            android:id="@+id/buttonIndication"
+            android:layout_width="169dp"
+            android:layout_height="169dp"
+            android:text="Indication"
+            app:layout_column="1"
+            app:layout_row="1"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        <Button
+            android:id="@+id/buttonBrand"
+            android:layout_width="169dp"
+            android:layout_height="169dp"
+            android:text="Brand Names"
+            app:layout_column="0"
+            app:layout_row="0"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        <Button
+            android:id="@+id/buttonAddDrug"
+            android:layout_width="169dp"
+            android:layout_height="169dp"
+            android:text="Add Drugs"
+            app:layout_column="0"
+            app:layout_row="2"
+            android:backgroundTint="@color/colorPrimary"/>
+    </android.support.v7.widget.GridLayout>
+
+    <Button
+        android:id="@+id/comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Comment"
+        android:textAlignment="center" />
+
+
+</RelativeLayout>
