@@ -62,7 +62,7 @@
             android:id="@+id/buttonBrand"
             android:layout_width="169dp"
             android:layout_height="169dp"
-            android:text="Brand Names"
+            android:text="Drugs"
             app:layout_column="0"
             app:layout_row="0"
             android:backgroundTint="@color/colorPrimary"/>
@@ -85,6 +85,8 @@
         android:layout_centerHorizontal="true"
         android:text="Comment"
         android:textAlignment="center" />
+
+
 
 
 </RelativeLayout>

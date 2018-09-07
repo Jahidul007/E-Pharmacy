@@ -3,6 +3,7 @@
     package="com.tutorial.authentication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -22,16 +23,28 @@
             android:label="E-Medicare"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".IndicationActivity" />
+        <activity
+            android:name=".indication.IndicationActivity"
+            android:label="Drugs By Indication" />
         <activity
             android:name=".drug.AddDrugActivity"
             android:label="Add Drug Info" />
         <activity android:name=".orderPack.OrderActivity" />
         <activity android:name=".orderPack.MyCart" />
-        <activity android:name=".comment.CommentActivity"
-
-            android:label ="Leave a comment">
-        </activity>
+        <activity
+            android:name=".comment.CommentActivity"
+            android:label="Leave a comment" />
+        <activity
+            android:name=".generics.GenericActivity"
+            android:label="Drugs By Generic" />
+        <activity
+            android:name=".admin.AdminActivity"
+            android:label="Admin" />
+        <activity
+            android:name=".admin.AddDrugsActivity"
+            android:label="Add Drugs By Admin" />
+        <activity android:name=".brands.BrandActivity"
+            android:label="Drugs List"></activity>
     </application>
 
 </manifest>

@@ -28,7 +28,7 @@
         <item
             android:id="@+id/Legal"
             android:icon="@drawable/ic_invert_colors_black_24dp"
-            android:title="About US" >
+            android:title="Admin" >
         </item>
     </group>
 </menu>

@@ -27,9 +27,14 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
+import com.tutorial.authentication.admin.AdminActivity;
+import com.tutorial.authentication.brands.BrandActivity;
 import com.tutorial.authentication.comment.CommentActivity;
 import com.tutorial.authentication.drug.AddDrugActivity;
+import com.tutorial.authentication.generics.GenericActivity;
 import com.tutorial.authentication.indication.Indication;
+import com.tutorial.authentication.indication.IndicationActivity;
+import com.tutorial.authentication.orderPack.MyCart;
 import com.tutorial.authentication.orderPack.OrderActivity;
 import com.tutorial.authentication.utils.SharedPrefManager;
 
@@ -105,6 +110,8 @@ public class NavDrawerActivity extends BaseActivity implements
             public void onClick(View view) {
 
                 Toast.makeText(getApplicationContext(),"Brand",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(NavDrawerActivity.this, BrandActivity.class);
+                startActivity(intent);
 
 
             }
@@ -114,6 +121,9 @@ public class NavDrawerActivity extends BaseActivity implements
             public void onClick(View view) {
 
                 Toast.makeText(getApplicationContext(),"Generic",Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(NavDrawerActivity.this, GenericActivity.class);
+                startActivity(intent);
 
 
             }
@@ -133,7 +143,8 @@ public class NavDrawerActivity extends BaseActivity implements
             public void onClick(View view) {
 
                 Toast.makeText(getApplicationContext(),"Indication",Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(NavDrawerActivity.this, IndicationActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -214,6 +225,13 @@ public class NavDrawerActivity extends BaseActivity implements
                         Toast.makeText(getApplicationContext(),"Help",Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawers();
                         break;
+                    case R.id.Legal:
+                        Intent intent = new Intent(NavDrawerActivity.this, AdminActivity.class);
+                        startActivity(intent);
+                        finish();
+                        drawerLayout.closeDrawers();
+                        break;
+
                 }
                 return false;
             }
@@ -320,6 +338,20 @@ public class NavDrawerActivity extends BaseActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.cart) {
+            /**if (in == 0)
+             Toast.makeText(this, "No items in cart yet", Toast.LENGTH_SHORT).show();
+             else {**/
+            Intent i = new Intent(this, MyCart.class);
+            //i.putExtra("Mednames", medinames);
+            //i.putIntegerArrayListExtra("qty", qty);
+            //i.putExtra("num", in);
+            startActivity(i);
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
