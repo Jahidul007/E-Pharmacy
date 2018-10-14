@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".NavDrawerActivity"
-            android:label="E-Medicare"
+            android:label="E-Pharmacy"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".BaseActivity" />
         <activity
@@ -30,7 +30,9 @@
             android:name=".drug.AddDrugActivity"
             android:label="Add Drug Info" />
         <activity android:name=".orderPack.OrderActivity" />
-        <activity android:name=".orderPack.MyCart" />
+        <activity
+            android:name=".orderPack.MyCart"
+            android:label="My Cart List" />
         <activity
             android:name=".comment.CommentActivity"
             android:label="Leave a comment" />
@@ -43,8 +45,17 @@
         <activity
             android:name=".admin.AddDrugsActivity"
             android:label="Add Drugs By Admin" />
-        <activity android:name=".brands.BrandActivity"
-            android:label="Drugs List"></activity>
+        <activity
+            android:name=".brands.BrandActivity"
+            android:label="List Of Drugs" />
+        <activity android:name=".brands.BrandDetailActivity" />
+        <activity
+            android:name=".order.MyOrderActivity"
+            android:label="My Order List" />
+        <activity android:name=".company.CompanyActivity"
+            android:label="List Of Company"/>
+        <activity android:name=".shipping.ShippingActivity"
+            android:label="Shipping Address"></activity>
     </application>
 
 </manifest>

@@ -1,16 +1,10 @@
 package com.tutorial.authentication.orderPack;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,24 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.firebase.client.Firebase;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.tutorial.authentication.NavDrawerActivity;
 import com.tutorial.authentication.R;
+import com.tutorial.authentication.brands.BrandActivity;
+import com.tutorial.authentication.brands.BrandDetailActivity;
+import com.tutorial.authentication.shipping.ShippingActivity;
 import com.tutorial.authentication.utils.SharedPrefManager;
 import com.tutorial.authentication.utils.Utils;
 
@@ -69,8 +54,14 @@ public class OrderActivity extends AppCompatActivity {
 
     DatabaseReference mDatabaseReference;
     int x = 1;
-    int in ;
+    int in;
     String stringVal;
+
+    TextView textViewPrice;
+
+    double value;
+
+    String priceValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +75,28 @@ public class OrderActivity extends AppCompatActivity {
         editTextMed = (EditText) findViewById(R.id.editTextMedicine);
         textView = (TextView) findViewById(R.id.textViewQuantity);
 
-        img = (ImageView) findViewById(R.id.camera);
+        textViewPrice = (TextView) findViewById(R.id.textViewPrice);
+
+        //img = (ImageView) findViewById(R.id.camera);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar2);
 
+        Intent intent = getIntent();
+        String brandName = intent.getStringExtra(BrandDetailActivity.BRAND_NAME);
+        String price = intent.getStringExtra(BrandDetailActivity.BRAND_PRICE);
 
+        value = Double.parseDouble(price);
+
+        priceValue = price;
+
+        editTextMed.setText(brandName);
+        textViewPrice.setText(price);
+
+        disableEditText(editTextMed);
+
+
+        System.out.println("bradname" + brandName);
+        System.out.println("bradname" + price);
         decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,9 +108,17 @@ public class OrderActivity extends AppCompatActivity {
                 if (x > 1) {
                     x = x - 1;
                     stringVal = String.valueOf(x);
+
+                    double price = value * x;
+
+                    priceValue = String.valueOf(price);
+                    textViewPrice.setText(priceValue);
+
+                    System.out.println(priceValue);
+
                     textView.setText(stringVal);
                 } else {
-                    Log.d("src", "Value can't be less than 0");
+                    Log.d("src", "Value can't be less than 1");
                 }
             }
         });
@@ -118,6 +134,13 @@ public class OrderActivity extends AppCompatActivity {
                     x = x + 1;
                     stringVal = String.valueOf(x);
                     textView.setText(stringVal);
+
+                    double price = value * x;
+
+                    priceValue = String.valueOf(price);
+                    textViewPrice.setText(priceValue);
+
+                    System.out.println(priceValue);
                 } else {
                     Log.d("src", "Value can't be greater than 10");
                 }
@@ -129,19 +152,19 @@ public class OrderActivity extends AppCompatActivity {
 
         //loadUserInformation();
 
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showImageChooser();
+        /**img.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View view) {
+        showImageChooser();
 
-            }
-        });
+        }
+        });**/
 
 
         addOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addToCart();
+                finish();
                 //Toast.makeText(getApplicationContext(), "Add to Cart", Toast.LENGTH_SHORT).show();
             }
         });
@@ -182,27 +205,34 @@ public class OrderActivity extends AppCompatActivity {
 
         //mEmail = firebaseUser.getEmail();
         final String encodedEmail = Utils.encodeEmail(mEmail.toLowerCase());
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("cart/"+encodedEmail);
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("cart/" + encodedEmail);
         System.out.println("Email: " + mDatabaseReference);
         System.out.println("profileImageUrl: " + profileImageUrl);
         System.out.println("profileImageUrl: " + firebaseUser);
         String medicine = editTextMed.getText().toString().trim();
 
-        if (firebaseUser != null && profileImageUrl != null && medicine != null && x!= 0) {
+        String price = String.valueOf(priceValue);
+        System.out.println(priceValue);
+
+        if (firebaseUser != null && medicine != null && x != 0 && priceValue != null) {
 
 
             String qty = String.valueOf(x);
 
             String id = mDatabaseReference.push().getKey();
 
-            order mOrder = new order(id,medicine,qty,profileImageUrl);
+            order mOrder = new order(id, medicine, qty, priceValue);
 
             mDatabaseReference.child(medicine).setValue(mOrder);
 
             System.out.println("qty: " + qty);
+            System.out.println("price: " + priceValue);
 
             Toast.makeText(this, "Add to cart List", Toast.LENGTH_SHORT).show();
 
+            Intent intent = new Intent(OrderActivity.this, MyCart.class);
+            startActivity(intent);
+            finish();
 
 
         } else {
@@ -214,70 +244,64 @@ public class OrderActivity extends AppCompatActivity {
 
                 Toast.makeText(OrderActivity.this, "Medicine name is Empty", Toast.LENGTH_SHORT).show();
 
-            } else{
-                img.requestFocus();
-                Toast.makeText(OrderActivity.this, "No Image Upload", Toast.LENGTH_SHORT).show();
-
             }
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
-            uriProfileImage = data.getData();
-
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriProfileImage);
-                img.setImageBitmap(bitmap);
-
-                uploadImageToFireBase();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-    }
-
-    private void uploadImageToFireBase() {
-        StorageReference profileImageRef =
-                FirebaseStorage.getInstance().getReference("prescriptionPics/" + System.currentTimeMillis() + ".jpg");
-
-        if (uriProfileImage != null) {
-            progressBar.setVisibility(View.VISIBLE);
-            profileImageRef.putFile(uriProfileImage)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressBar.setVisibility(View.GONE);
-
-                            profileImageUrl = taskSnapshot.getDownloadUrl().toString();
-
-                            System.out.println("profileImageUrl: " + profileImageUrl);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(OrderActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-    }
-
-    private void showImageChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select profile image"), CHOOSE_IMAGE);
-    }
-
+    /**
+     * @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+     * super.onActivityResult(requestCode, resultCode, data);
+     * <p>
+     * if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+     * <p>
+     * uriProfileImage = data.getData();
+     * <p>
+     * try {
+     * Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriProfileImage);
+     * img.setImageBitmap(bitmap);
+     * <p>
+     * uploadImageToFireBase();
+     * <p>
+     * } catch (IOException e) {
+     * e.printStackTrace();
+     * }
+     * }
+     * <p>
+     * <p>
+     * }
+     * <p>
+     * private void uploadImageToFireBase() {
+     * StorageReference profileImageRef =
+     * FirebaseStorage.getInstance().getReference("prescriptionPics/" + System.currentTimeMillis() + ".jpg");
+     * <p>
+     * if (uriProfileImage != null) {
+     * progressBar.setVisibility(View.VISIBLE);
+     * profileImageRef.putFile(uriProfileImage)
+     * .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+     * @Override public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+     * progressBar.setVisibility(View.GONE);
+     * <p>
+     * profileImageUrl = taskSnapshot.getDownloadUrl().toString();
+     * <p>
+     * System.out.println("profileImageUrl: " + profileImageUrl);
+     * }
+     * })
+     * .addOnFailureListener(new OnFailureListener() {
+     * @Override public void onFailure(@NonNull Exception e) {
+     * progressBar.setVisibility(View.GONE);
+     * Toast.makeText(OrderActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+     * }
+     * });
+     * }
+     * }
+     * <p>
+     * private void showImageChooser() {
+     * Intent intent = new Intent();
+     * intent.setType("image/*");
+     * intent.setAction(Intent.ACTION_GET_CONTENT);
+     * startActivityForResult(Intent.createChooser(intent, "Select profile image"), CHOOSE_IMAGE);
+     * }
+     **/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_cart, menu);
@@ -291,15 +315,24 @@ public class OrderActivity extends AppCompatActivity {
 
         if (id == R.id.cart) {
             /**if (in == 0)
-                Toast.makeText(this, "No items in cart yet", Toast.LENGTH_SHORT).show();
-            else {**/
-                Intent i = new Intent(this, MyCart.class);
-                //i.putExtra("Mednames", medinames);
-                //i.putIntegerArrayListExtra("qty", qty);
-                //i.putExtra("num", in);
-                startActivity(i);
+             Toast.makeText(this, "No items in cart yet", Toast.LENGTH_SHORT).show();
+             else {**/
+            Intent i = new Intent(this, MyCart.class);
+            //i.putExtra("Mednames", medinames);
+            //i.putIntegerArrayListExtra("qty", qty);
+            //i.putExtra("num", in);
+            startActivity(i);
+
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void disableEditText(EditText editText) {
+        editText.setFocusable(true);
+        editText.setEnabled(false);
+        editText.setCursorVisible(false);
+        editText.setKeyListener(null);
+        //editText.setBackgroundColor(Color.TRANSPARENT);
     }
 }

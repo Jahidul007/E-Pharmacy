@@ -5,7 +5,7 @@ public class Indication {
     private String indicationId;
     private String indicationName;
 
-    public Indication(){
+    public Indication() {
 
     }
 

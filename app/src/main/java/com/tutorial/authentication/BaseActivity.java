@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.firebase.client.Firebase;
 
 public class BaseActivity extends AppCompatActivity {
+
     public ProgressDialog mProgressDialog;
 
     @Override

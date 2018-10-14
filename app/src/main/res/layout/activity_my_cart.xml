@@ -6,34 +6,192 @@
     android:layout_height="match_parent"
     tools:context=".orderPack.MyCart">
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="372dp"
-        android:layout_height="378dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true" />
-
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="match_parent"
+        android:layout_width="188dp"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/list"
-        android:layout_marginBottom="82dp"
-        android:text="Total:"
-        android:textSize="30dp"
-        android:layout_alignLeft="@+id/list" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="149dp"
+        android:layout_marginEnd="176dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="176dp"
+        android:background="@color/google"
+        android:text="Total Price:"
+        android:textSize="30dp" />
+
+    <RelativeLayout
+        android:id="@+id/updateDelete"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="83dp"
+        android:background="@color/google"
+        android:visibility="invisible"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textViewMedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:text="text"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="50dp"
+            android:layout_marginStart="36dp"
+            android:text="Update"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="36dp" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="23dp"
+            android:text="Delete"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="23dp" />
+
+        <EditText
+            android:id="@+id/editTextQuantity"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/delete"
+            android:layout_marginLeft="40dp"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:hint="Quantity"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/buttonOk"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="23dp"
+            android:text="ok"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="23dp"
+            android:visibility="invisible"/>
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/camera"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_alignStart="@+id/progressBar2"
+        android:layout_alignTop="@+id/progressBar2"
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        android:layout_alignLeft="@+id/progressBar2" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textViewTotalPrice"
+        android:layout_alignTop="@+id/textView9"
+        android:visibility="invisible"
+        android:layout_alignLeft="@+id/textViewTotalPrice" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="209dp"
+        android:layout_height="45dp"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_marginBottom="88dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
+        android:text="Upload a Prescription:"
+        android:textColor="@color/forestgreen"
+        android:textSize="20sp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonCheckOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/list"
-        android:layout_marginStart="-12dp"
-        android:text="Check out"
-        android:layout_alignLeft="@+id/list"
-        android:layout_marginLeft="-12dp"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:text="Check out" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_marginTop="12dp"
+        android:text="Name"
+        android:layout_alignLeft="@+id/textView8"
+        android:textColor="@color/google"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView12"
+        android:text="Price"
+
+        android:layout_marginLeft="200dp"
+        android:textColor="@color/google"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView12"
+        android:layout_marginEnd="17dp"
+        android:textStyle="bold"
+        android:text="Quntity"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="17dp"
+        android:textColor="@color/google"/>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="278dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="35dp" />
+
+    <TextView
+        android:id="@+id/textViewTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+
+        android:layout_alignEnd="@+id/textView14"
+        android:layout_alignTop="@+id/textView8"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:layout_alignRight="@+id/textView14" />
 </RelativeLayout>

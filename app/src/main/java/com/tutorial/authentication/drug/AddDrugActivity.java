@@ -21,8 +21,8 @@ import com.tutorial.authentication.utils.SharedPrefManager;
 import com.tutorial.authentication.utils.Utils;
 
 public class AddDrugActivity extends AppCompatActivity {
-    
-    EditText brand,generic,company,strength,form;
+
+    EditText brand, generic, company, strength, form;
     Button add;
 
     FirebaseDatabase database;
@@ -38,21 +38,21 @@ public class AddDrugActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_drug);
-        
-        brand = (EditText) findViewById(R.id.editTextBrandName) ;
-        generic = (EditText) findViewById(R.id.editTextGenericName) ;
-        company = (EditText) findViewById(R.id.editTextCompanyName) ;
-        strength = (EditText) findViewById(R.id.editTextStrength) ;
-        form = (EditText) findViewById(R.id.editTextForm) ;
-        add = (Button) findViewById(R.id.buttonadd) ;
-        
+
+        brand = (EditText) findViewById(R.id.editTextBrandName);
+        generic = (EditText) findViewById(R.id.editTextGenericName);
+        company = (EditText) findViewById(R.id.editTextCompanyName);
+        strength = (EditText) findViewById(R.id.editTextStrength);
+        form = (EditText) findViewById(R.id.editTextForm);
+        add = (Button) findViewById(R.id.buttonadd);
+
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("requestToAdd");
 
         sharedPrefManager = new SharedPrefManager(mContext);
         mUsername = sharedPrefManager.getName();
         mEmail = sharedPrefManager.getUserEmail();
-        
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,21 +78,21 @@ public class AddDrugActivity extends AppCompatActivity {
         String strengthName = strength.getText().toString().trim();
         String formName = form.getText().toString().trim();
 
-        if(!TextUtils.isEmpty(brandName) && !TextUtils.isEmpty(genericName)){
+        if (!TextUtils.isEmpty(brandName) && !TextUtils.isEmpty(genericName)) {
 
-            Drug drug = new Drug(encodedEmail,brandName,genericName,companyName,strengthName,formName);
+            Drug drug = new Drug(encodedEmail, brandName, genericName, companyName, strengthName, formName);
             myRef.child(brandName).setValue(drug);
-            Toast.makeText(this,"Drug save successfully",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Drug save successfully", Toast.LENGTH_LONG).show();
             brand.setText("");
             generic.setText("");
             company.setText("");
             strength.setText("");
             form.setText("");
-            Intent intent = new Intent(getApplicationContext(),NavDrawerActivity.class);
+            Intent intent = new Intent(getApplicationContext(), NavDrawerActivity.class);
             startActivity(intent);
             finish();
 
-        } else{
+        } else {
 
             if (brandName.isEmpty()) {
                 brand.setError("Brand name required");
@@ -118,12 +118,13 @@ public class AddDrugActivity extends AppCompatActivity {
         }
 
     }
+
     @Override
     public void onBackPressed() {
-         Intent intent = new Intent(this, NavDrawerActivity.class);
-         intent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-         startActivity(intent);
-         finish();
+        Intent intent = new Intent(this, NavDrawerActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+        startActivity(intent);
+        finish();
     }
 
 }

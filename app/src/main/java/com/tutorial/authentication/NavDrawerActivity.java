@@ -15,7 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+
 import android.support.design.widget.NavigationView;
 import android.widget.Toast;
 
@@ -30,12 +32,13 @@ import com.squareup.picasso.Picasso;
 import com.tutorial.authentication.admin.AdminActivity;
 import com.tutorial.authentication.brands.BrandActivity;
 import com.tutorial.authentication.comment.CommentActivity;
+import com.tutorial.authentication.company.CompanyActivity;
 import com.tutorial.authentication.drug.AddDrugActivity;
 import com.tutorial.authentication.generics.GenericActivity;
 import com.tutorial.authentication.indication.Indication;
 import com.tutorial.authentication.indication.IndicationActivity;
 import com.tutorial.authentication.orderPack.MyCart;
-import com.tutorial.authentication.orderPack.OrderActivity;
+import com.tutorial.authentication.order.MyOrderActivity;
 import com.tutorial.authentication.utils.SharedPrefManager;
 
 import java.io.BufferedReader;
@@ -46,11 +49,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-// This class is a simple activity with NavigationDrawer
-    // we get data stored in sharedPrefference and display on the header view of the NavigationDrawer
 public class NavDrawerActivity extends BaseActivity implements
-        GoogleApiClient.OnConnectionFailedListener{
+        GoogleApiClient.OnConnectionFailedListener {
 
     Context mContext = this;
 
@@ -65,7 +65,8 @@ public class NavDrawerActivity extends BaseActivity implements
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
 
-    Button indication,brand,generic,pharma,addDrug,order,comments;
+
+    Button indication, brand, generic, pharma, addDrug, order, comments;
 
     public static final String Email_ID = "email";
 
@@ -109,7 +110,7 @@ public class NavDrawerActivity extends BaseActivity implements
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getApplicationContext(),"Brand",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Brand", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(NavDrawerActivity.this, BrandActivity.class);
                 startActivity(intent);
 
@@ -120,7 +121,7 @@ public class NavDrawerActivity extends BaseActivity implements
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getApplicationContext(),"Generic",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Generic", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(NavDrawerActivity.this, GenericActivity.class);
                 startActivity(intent);
@@ -132,7 +133,10 @@ public class NavDrawerActivity extends BaseActivity implements
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getApplicationContext(),"Pharma",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Pharma", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(NavDrawerActivity.this, CompanyActivity.class);
+                startActivity(intent);
 
 
             }
@@ -142,7 +146,7 @@ public class NavDrawerActivity extends BaseActivity implements
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getApplicationContext(),"Indication",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Indication", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(NavDrawerActivity.this, IndicationActivity.class);
                 startActivity(intent);
 
@@ -152,7 +156,7 @@ public class NavDrawerActivity extends BaseActivity implements
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getApplicationContext(),"Drug",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Drug", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(NavDrawerActivity.this, AddDrugActivity.class);
                 startActivity(intent);
                 finish();
@@ -164,8 +168,8 @@ public class NavDrawerActivity extends BaseActivity implements
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getApplicationContext(),"Order",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(NavDrawerActivity.this, OrderActivity.class);
+                Toast.makeText(getApplicationContext(), "Order", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(NavDrawerActivity.this, MyOrderActivity.class);
                 startActivity(intent);
 
             }
@@ -175,13 +179,12 @@ public class NavDrawerActivity extends BaseActivity implements
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getApplicationContext(),"comment",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "comment", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(NavDrawerActivity.this, CommentActivity.class);
                 startActivity(intent);
 
             }
         });
-
 
 
         Picasso.with(mContext)
@@ -199,7 +202,7 @@ public class NavDrawerActivity extends BaseActivity implements
     }
 
     // Initialize and add Listener to NavigationDrawer
-    public void initNavigationDrawer(){
+    public void initNavigationDrawer() {
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -208,13 +211,15 @@ public class NavDrawerActivity extends BaseActivity implements
 
                 int id = item.getItemId();
 
-                switch (id){
+                switch (id) {
                     case R.id.payment:
-                        Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.trip:
-                        Toast.makeText(getApplicationContext(),"Ship",Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getApplicationContext(), GenericActivity.class);
+                        startActivity(i);
+                        Toast.makeText(getApplicationContext(), "Drugs by Generics", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.logout:
@@ -222,7 +227,7 @@ public class NavDrawerActivity extends BaseActivity implements
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.tips:
-                        Toast.makeText(getApplicationContext(),"Help",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Help", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.Legal:
@@ -239,7 +244,7 @@ public class NavDrawerActivity extends BaseActivity implements
 
         //set up navigation drawer
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close){
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -255,7 +260,7 @@ public class NavDrawerActivity extends BaseActivity implements
     }
 
     // This method configures Google SignIn
-    public void configureSignIn(){
+    public void configureSignIn() {
 // Configure sign-in to request the user's basic profile like name and email
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -270,7 +275,7 @@ public class NavDrawerActivity extends BaseActivity implements
     }
 
     //method to logout
-    private void signOut(){
+    private void signOut() {
         new SharedPrefManager(mContext).clear();
         //mAuth.signOut();
         Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
@@ -284,42 +289,44 @@ public class NavDrawerActivity extends BaseActivity implements
                 }
         );
     }
-    public List<Indication> getStudent(){
+
+    public List<Indication> getStudent() {
         List<Indication> student = new ArrayList<>();
-        File file = new File(System.getProperty("user.dir")+File.separator+"temp1.txt");
+        File file = new File(System.getProperty("user.dir") + File.separator + "temp1.txt");
 
         String filename = "temp1.txt";
-        System.out.println("indication: "+file);
+        System.out.println("indication: " + file);
         FileReader fileReader;
         BufferedReader br;
         String str;
         try {
             fileReader = new FileReader(filename);
             br = new BufferedReader(fileReader);
-            while( (str = br.readLine()) != null){
+            while ((str = br.readLine()) != null) {
                 String temp[] = str.split("\\s");
-                student.add(new Indication(temp[0],temp[1]));
+                student.add(new Indication(temp[0], temp[1]));
 
-                System.out.println("indication: "+temp[0]+" "+temp[1]);
+                System.out.println("indication: " + temp[0] + " " + temp[1]);
             }
 
         } catch (FileNotFoundException ex) {
             try {
                 file.createNewFile();
             } catch (IOException ex1) {
-                Toast.makeText(this,"Can't create file",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Can't create file", Toast.LENGTH_LONG).show();
             }
         } catch (IOException ex) {
 
         }
         return student;
     }
+
     @Override
     public void onBackPressed() {
 
         new AlertDialog.Builder(this)
                 .setIcon(R.drawable.ic_shopping_cart_black_24dp)
-                .setTitle("E-Medicare")
+                .setTitle("E-Pharmacy")
                 .setMessage("Are you sure you want to exit?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -330,11 +337,14 @@ public class NavDrawerActivity extends BaseActivity implements
                 .setNegativeButton("No", null)
                 .show();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_cart, menu);
+
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

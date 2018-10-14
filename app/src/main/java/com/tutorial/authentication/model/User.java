@@ -8,7 +8,7 @@ public class User {
     private String fullName;
     private String photo;
     private String email;
-    private HashMap<String,Object> timestampJoined;
+    private HashMap<String, Object> timestampJoined;
 
     public User() {
     }

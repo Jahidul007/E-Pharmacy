@@ -19,7 +19,7 @@ public class OrderList extends ArrayAdapter<order> {
 
 
     public OrderList(Activity context, List<order> orderList) {
-        super(context, R.layout.layout_order_list,orderList);
+        super(context, R.layout.layout_order_list, orderList);
         this.context = context;
         this.orderList = orderList;
     }
@@ -31,15 +31,17 @@ public class OrderList extends ArrayAdapter<order> {
 
         LayoutInflater inflater = context.getLayoutInflater();
 
-        View listViewItem = inflater.inflate(R.layout.layout_order_list,null,true);
+        View listViewItem = inflater.inflate(R.layout.layout_order_list, null, true);
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
         TextView textViewQty = (TextView) listViewItem.findViewById(R.id.textViewQuant);
+        TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.textViewPrice);
 
         order mOrder = orderList.get(position);
 
         textViewName.setText(mOrder.getName());
         textViewQty.setText(mOrder.getQty());
+        textViewPrice.setText("৳ " + mOrder.getPrice());
 
         return listViewItem;
     }

@@ -2,14 +2,14 @@ package com.tutorial.authentication.drug;
 
 public class Drug {
 
-    String emailId ;
+    String emailId;
     String brandName;
     String genericName;
     String companyName;
     String strength;
     String form;
 
-    public Drug(){
+    public Drug() {
 
     }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">E-Medicare</string>
+    <string name="app_name">E-Pharmacy</string>
     <string name="loading">Loading…</string>
     <string name="log_error_occurred">"Error occurred: "</string>
     <string name="drawer_open">Open</string>

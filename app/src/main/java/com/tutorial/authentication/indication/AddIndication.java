@@ -12,12 +12,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class AddIndication   {
+public class AddIndication {
     final static String fileName = "Indication.txt";
-    final static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/download/android-firebase-authentication-master/" ;
+    final static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/download/android-firebase-authentication-master/";
     final static String TAG = AddIndication.class.getName();
 
-    public static  String ReadFile( Context context){
+    public static String ReadFile(Context context) {
         String line = null;
 
         try {
@@ -33,8 +33,7 @@ public class AddIndication   {
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             StringBuilder stringBuilder = new StringBuilder();
 
-            while ( (line = bufferedReader.readLine()) != null )
-            {
+            while ((line = bufferedReader.readLine()) != null) {
                 stringBuilder.append(line + System.getProperty("line.separator"));
 
                 System.out.println(line);
@@ -43,11 +42,9 @@ public class AddIndication   {
             line = stringBuilder.toString();
 
             bufferedReader.close();
-        }
-        catch(FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             Log.d(TAG, ex.getMessage());
-        }
-        catch(IOException ex) {
+        } catch (IOException ex) {
             Log.d(TAG, ex.getMessage());
         }
         return line;

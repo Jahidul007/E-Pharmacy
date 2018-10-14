@@ -1,14 +1,14 @@
 package com.tutorial.authentication.generics;
 
-public class Generics {
+public class generics {
 
     String id;
     String genericName;
 
-    public Generics() {
+    public generics() {
     }
 
-    public Generics(String id, String genericName) {
+    public generics(String id, String genericName) {
         this.id = id;
         this.genericName = genericName;
     }

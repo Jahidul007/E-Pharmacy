@@ -24,7 +24,7 @@
         android:layout_above="@+id/login_with_google"
         android:layout_marginBottom="100dp"
         android:text="Welcome To
-E-Medicare"
+E-Pharmacy"
         android:textAlignment="center"
         android:textSize="30sp"/>
 

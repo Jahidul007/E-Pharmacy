@@ -5,17 +5,17 @@ public class order {
     String id;
     String name;
     String qty;
-    String photo;
+    String price;
 
     public order(){
 
     }
 
-    public order(String id, String name, String qty, String photo) {
+    public order(String id, String name, String qty,String price) {
         this.id = id;
         this.name = name;
         this.qty = qty;
-        this.photo = photo;
+        this.price = price;
     }
 
     public String getId() {
@@ -29,8 +29,7 @@ public class order {
     public String getQty() {
         return qty;
     }
-
-    public String getPhoto() {
-        return photo;
+    public String getPrice() {
+        return price;
     }
 }
