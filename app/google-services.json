@@ -1,9 +1,9 @@
 {
   "project_info": {
-    "project_number": "985300477523",
-    "firebase_url": "https://android-firebase-authent-262ea.firebaseio.com",
-    "project_id": "android-firebase-authent-262ea",
-    "storage_bucket": "android-firebase-authent-262ea.appspot.com"
+    "project_number": "your id",
+    "firebase_url": "your firebase url",
+    "project_id": "firebase id",
+    "storage_bucket": "firebase storage link"
   },
   "client": [
     {
